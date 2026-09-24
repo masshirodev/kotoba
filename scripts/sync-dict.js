@@ -10,12 +10,13 @@
  * apps gitignore the copy and run this from `prepare`.
  */
 import { cpSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
-import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const dest = resolve(process.argv[2] ?? 'static/dict');
-const require = createRequire(import.meta.url);
-const src = join(dirname(require.resolve('@patdx/kuromoji/package.json')), 'dict');
+// kotoba's own copy: the package exports neither its package.json nor dict/.
+const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const src = join(root, 'node_modules', '@patdx', 'kuromoji', 'dict');
 
 if (!existsSync(src)) {
 	console.error(`kuromoji dictionary not found at ${src} -- run an install in kotoba first`);
