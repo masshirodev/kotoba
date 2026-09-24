@@ -45,6 +45,17 @@ code.
    and point the app at it with `KOTOBA_JMDICT` (or `setJmdictPath()`). Without
    it, lookups answer nothing rather than failing.
 
+4. **In a Docker image**, kotoba comes in as a named build context beside the
+   app, so the `link:../kotoba` path resolves the same inside: `docker build
+--build-context kotoba=../kotoba .`, or compose's
+   `build.additional_contexts: { kotoba: ../kotoba }`. yomu's Dockerfile is the
+   worked example (a `with-kotoba` stage copies `package.json`, `yarn.lock`,
+   `src` and `scripts` to `/kotoba` and installs there). The host that builds
+   needs a checkout of this repo beside the app.
+
+**Who uses it:** tsundoku (since 2026-09-23) and yomu (since 2026-09-24,
+yomu's `230c933`: its own copies of these modules are gone).
+
 ## Mining
 
 Looked-up words become flashcard **candidates**, never cards on their own:
