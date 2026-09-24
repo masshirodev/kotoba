@@ -1,0 +1,35 @@
+{
+	"name": "kotoba",
+	"version": "0.1.0",
+	"private": true,
+	"description": "The Japanese lookup yomu and tsundoku share: kuromoji tokenizing, JMdict, furigana, romaji.",
+	"type": "module",
+	"packageManager": "yarn@1.22.22",
+	"exports": {
+		".": "./src/index.ts",
+		"./server": "./src/server/index.ts"
+	},
+	"bin": {
+		"kotoba-sync-dict": "./scripts/sync-dict.js",
+		"kotoba-build-dict": "./scripts/build-dict.js"
+	},
+	"scripts": {
+		"check": "tsc --noEmit",
+		"lint": "prettier --check .",
+		"format": "prettier --write .",
+		"test": "vitest run",
+		"build:dict": "node scripts/build-dict.js"
+	},
+	"dependencies": {
+		"@patdx/kuromoji": "^1.0.4",
+		"better-sqlite3": "^12.11.1"
+	},
+	"devDependencies": {
+		"@types/better-sqlite3": "^7.6.13",
+		"@types/node": "^24",
+		"prettier": "^3.8.3",
+		"typescript": "^6.0.3",
+		"vite": "^8.0.16",
+		"vitest": "^4.1.8"
+	}
+}
