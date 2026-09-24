@@ -112,6 +112,9 @@ export function annotateSentence(
 	return out.join('');
 }
 
+/** A character name's recorded reading, which the tokenizer can't derive. */
+export type NameReading = { surface: string; reading: string | null };
+
 export type CardDraft = {
 	lemma: string;
 	front: string;
