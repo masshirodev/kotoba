@@ -24,3 +24,11 @@ export {
 	type Candidate,
 	type LookupRecord
 } from './mining.ts';
+export {
+	annotateSentence,
+	bracketFurigana,
+	composeCard,
+	type CardDraft,
+	type Enrichment,
+	type SentenceToken
+} from './card.ts';

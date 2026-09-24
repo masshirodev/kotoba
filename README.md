@@ -16,10 +16,10 @@ kotoba run on the workstation; nothing fetches it from anywhere.
 
 ## Two halves
 
-| Import          | Runs in     | What                                                                                                                                       |
-| --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `kotoba`        | the browser | `tokenize` (kuromoji), `furigana`, `toHiragana`, `toRomaji`, `applyNames`, `setDictionaryPath`, and mining: `isMineable`, `rankCandidates` |
-| `kotoba/server` | the server  | `lookup`, `lookupForm`, `dictionaryAvailable`, `setJmdictPath` (JMdict in SQLite)                                                          |
+| Import          | Runs in     | What                                                                                                                                                                                                        |
+| --------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `kotoba`        | the browser | `tokenize` (kuromoji), `furigana`, `toHiragana`, `toRomaji`, `applyNames`, `setDictionaryPath`, and mining: `isMineable`, `rankCandidates`, and cards: `composeCard`, `bracketFurigana`, `annotateSentence` |
+| `kotoba/server` | the server  | `lookup`, `lookupForm`, `dictionaryAvailable`, `setJmdictPath` (JMdict in SQLite)                                                                                                                           |
 
 **Tokenizing runs in the browser** on purpose: it's per line and CPU-bound,
 and the reading device has the cores. **Lookup runs on the server**: once per
@@ -52,7 +52,13 @@ Looked-up words become flashcard **candidates**, never cards on their own:
 stutters, and `rankCandidates` weights the number of separate sessions a word
 was looked up in above the raw count (`SESSION_WEIGHT`). What you looked up is
 better evidence of what you don't know than any frequency list. Each app
-approves candidates in a batch and makes the cards itself.
+approves candidates in a batch and sends the cards itself.
+
+A card is `composeCard`: the dictionary form on the front (never the
+inflected form met in the text); on the back what it means, how it sounds
+(bracket furigana, which Kumiko renders as ruby, and romaji), the sentence it
+was met in, and any note. The caller names its tags; yomu's LLM enrichment
+stays in yomu and arrives as the optional `enrichment`.
 
 ## What it doesn't do
 
