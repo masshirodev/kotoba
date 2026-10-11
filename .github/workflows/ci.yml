@@ -1,0 +1,49 @@
+# Checks every push to main and every pull request. The repository is public,
+# so Actions minutes are free and this is where its CI belongs.
+#
+# A change here changes the apps that link kotoba by path, so the second job
+# runs yomu's suite against this commit, laid out as on the workstation
+# (../kotoba beside ../yomu). tsundoku links it too, but it is private and
+# out of reach of this workflow's token.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  kotoba:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn run check
+      - run: yarn run lint
+      - run: yarn run test
+
+  yomu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: kotoba
+      - uses: actions/checkout@v4
+        with:
+          repository: masshirodev/yomu
+          path: yomu
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: yarn install --frozen-lockfile
+        working-directory: kotoba
+      - run: yarn install --frozen-lockfile
+        working-directory: yomu
+      - run: yarn run check
+        working-directory: yomu
+      - run: yarn run test
+        working-directory: yomu

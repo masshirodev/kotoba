@@ -4,7 +4,8 @@ kotoba is a source package shared by `~/projects/yomu` and
 `~/projects/tsundoku`, linked by path (`link:../kotoba`). Read README.md.
 
 - A change here changes both apps. Run their checks and tests, not only
-  kotoba's, before pushing.
+  kotoba's, before pushing. CI (`.github/workflows/ci.yml`) runs kotoba's and
+  yomu's on every push; tsundoku is private, so its suite is still yours to run.
 - Keep the two halves apart: `src/` (browser-safe) never imports
   `src/server/`, and nothing in `src/server/` is browser code.
 - Relative imports carry `.ts`, so Node's type stripping can run the scripts
