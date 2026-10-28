@@ -62,7 +62,6 @@ export function bracketFurigana(segments: FuriganaSegment[]): string {
 }
 
 const HAN = /\p{Script=Han}/u;
-const KANA_ONLY = /^[\p{Script=Hiragana}\p{Script=Katakana}ー]+$/u;
 const CJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u;
 
 /**

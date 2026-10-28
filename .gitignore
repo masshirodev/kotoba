@@ -1,2 +1,9 @@
-node_modules
 /data
+
+# Machine-local and scratch, never committed (AGENTS.md)
+AGENTS.local.md
+temp/
+
+# Node
+node_modules/
+coverage/

@@ -24,7 +24,8 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn run check
       - run: yarn run lint
-      - run: yarn run test
+      - name: Suite, 65% floor
+        run: yarn run test:coverage
 
   yomu:
     runs-on: ubuntu-latest

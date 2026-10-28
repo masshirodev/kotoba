@@ -82,9 +82,12 @@ stays in yomu and arrives as the optional `enrichment`.
 
 ```sh
 yarn run check    # tsc
-yarn run lint     # prettier
+yarn run lint     # prettier, then eslint
 yarn run test     # vitest; the JMdict tests run when KOTOBA_JMDICT (or data/jmdict.db) exists
+yarn run test:coverage   # the suite, failing below the 65% floor
 ```
+
+`doc/TESTING.md` has the floor, the hooks and what runs where.
 
 The tests came with the code from yomu, and the lines they check are real ones
 from yomu's captures.
