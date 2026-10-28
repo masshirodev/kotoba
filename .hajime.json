@@ -9,12 +9,9 @@
 	"board": "kotoba",
 	"skip": [
 		{
-			"path": "prettier.config.js",
-			"why": ".prettierrc holds the same house style (tabs, single quotes, no trailing commas, width 100); a second config file would only be a second place to drift"
-		},
-		{
 			"path": "package.json",
-			"why": "The suite is vitest, not node --test, so coverageFloorHolds cannot read its test:coverage script. The floor lives in vitest.config.ts (coverage.thresholds lines/branches/functions at the floor) and is enforced by test:coverage in pre-push and CI; doc/TESTING.md, Coverage. hajime matches skips by path, so this also silences the package.json json entry until hajime can skip one entry (Hajime board)."
+			"id": "node:coverage-floor",
+			"why": "The suite is vitest, not node --test, so coverageFloorHolds cannot read its test:coverage script. The floor lives in vitest.config.ts (coverage.thresholds lines/branches/functions at the floor) and is enforced by test:coverage (vitest run --coverage) in pre-push and CI; doc/TESTING.md, Coverage. Hajime c30 is vitest support."
 		}
 	]
 }
